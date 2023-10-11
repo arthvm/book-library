@@ -92,11 +92,13 @@ body {
 }
 
 .read-status.read {
+  cursor: pointer;
   color: green;
   font-weight: bold;
 }
 
 .read-status {
+  cursor: pointer;
   color: rgb(150, 2, 2);
   font-weight: bold;
 }
