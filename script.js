@@ -14,6 +14,7 @@ const bookRead = document.getElementById("book_read");
 let readStatus = document.querySelectorAll(".read-status");
 
 addBtn.addEventListener("click", () => {
+  ResetModal();
   bookSettings.showModal();
 });
 
@@ -27,6 +28,13 @@ formBtn.addEventListener("click", () => {
   addBookCard(bookLibrary[bookLibrary.length - 1]);
   UpdateReadChecks();
 });
+
+function ResetModal() {
+  bookTitle.value = null;
+  bookAuthor.value = null;
+  bookPages.value = null;
+  bookRead.checked = false;
+}
 
 function UpdateReadChecks() {
   readStatus = document.querySelectorAll(".read-status");
