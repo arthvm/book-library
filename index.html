@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style.css">
+    <script src="./script.js" defer></script>
+    <script src="https://kit.fontawesome.com/a5cb30fd77.js" crossorigin="anonymous"></script>
+    <title>Library</title>
+</head>
+
+<body>
+    <div class="container">
+        <header class="header">
+            <h1 class="title">Library</h1>
+        </header>
+        <dialog class="book-settings">
+            <h1 class="settings-title">New Book</h1>
+            <form method="dialog" class="book-form">
+                <span class="binfo">Title:
+                    <input type="text" name="book-title" id="book_title">
+                </span>
+                <span class="binfo">Author:
+                    <input type="text" name="book-author" id="book_author">
+                </span>
+                <span class="binfo">Pages:
+                    <input type="number" name="book-pages" id="book_pages">
+                </span>
+                <span class="read-checking">Was it read?
+                    <input type="checkbox" name="book-read" id="book_read">
+                </span>
+                <button class="form-btn">Add Book</button>
+            </form>
+        </dialog>
+        <div class="library">
+            <div class="cards-container">
+
+            </div>
+        </div>
+        <div class="add-book">
+            <i class="fa-solid fa-plus fa-lg" style="color:#f8fafc;"></i>
+        </div>
+        <footer class="footer">
+            <a href="https://github.com/arthvm/book-library" class="github-page" target="_blank"
+                rel="noreferrer noopener">
+                <i class="fa-brands fa-github fa-2xl"></i>
+                <p class="footer">@arthvm</p>
+            </a>
+        </footer>
+    </div>
+</body>
+
+</html>
