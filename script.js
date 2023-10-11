@@ -11,6 +11,8 @@ const bookAuthor = document.getElementById("book_author");
 const bookPages = document.getElementById("book_pages");
 const bookRead = document.getElementById("book_read");
 
+let readStatus = document.querySelectorAll(".read-status");
+
 addBtn.addEventListener("click", () => {
   bookSettings.showModal();
 });
@@ -23,7 +25,19 @@ formBtn.addEventListener("click", () => {
     bookRead.checked
   );
   addBookCard(bookLibrary[bookLibrary.length - 1]);
+  UpdateReadChecks();
 });
+
+function UpdateReadChecks() {
+  readStatus = document.querySelectorAll(".read-status");
+  readStatus.forEach((element) =>
+    element.addEventListener("click", (e) => {
+      e.target.textContent =
+        e.target.textContent == "Read" ? "To Read" : "Read";
+      e.target.classList.toggle("read");
+    })
+  );
+}
 
 function Book(title, author, pages, read) {
   this.title = title;
@@ -43,14 +57,9 @@ function addBookCard(book) {
     <h3 class="book-author">by ${book.author}</h3>
     <p class="book-pages">${book.pages} pages</p>
     <div class="book-read">
-        <input type="checkbox" class="read-checkbox" ${
-          book.read == true ? "checked" : ""
-        }>
-        <p>Read</p>
+        <p class="read-status ${book.read == true ? "read" : ""}">${
+    book.read == true ? "Read" : "To Read"
+  }</p>
     </div>
   </div>`;
 }
-
-bookLibrary.forEach((book) => {
-  addBookCard(book);
-});

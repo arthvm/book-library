@@ -91,13 +91,14 @@ body {
   background-color: var(--color-200);
 }
 
-.read-checking {
-  align-self: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
+.read-status.read {
+  color: green;
+  font-weight: bold;
+}
+
+.read-status {
+  color: rgb(150, 2, 2);
+  font-weight: bold;
 }
 
 .library {
