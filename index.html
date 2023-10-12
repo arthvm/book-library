@@ -25,7 +25,8 @@
                     <input type="text" name="book-author" id="book_author">
                 </span>
                 <span class="binfo">Pages:
-                    <input type="number" name="book-pages" id="book_pages">
+                    <input type="number" min="0" oninput="this.value = Math.abs(this.value)" name="book-pages"
+                        id="book_pages">
                 </span>
                 <span class="read-checking">Was it read?
                     <input type="checkbox" name="book-read" id="book_read">
