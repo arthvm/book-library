@@ -127,7 +127,7 @@ body {
   grid-template-areas:
     "title ."
     "author read"
-    "pages .";
+    "pages options";
 }
 
 .book-title {
@@ -180,6 +180,18 @@ body {
 .read-checkbox:checked::before,
 .read-checking > input:checked::before {
   transform: scale(1);
+}
+
+.book-options {
+  grid-area: options;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.change-btn {
+  cursor: pointer;
 }
 
 .add-book {
