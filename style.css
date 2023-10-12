@@ -194,6 +194,10 @@ body {
   cursor: pointer;
 }
 
+.delete-btn {
+  cursor: pointer;
+}
+
 .add-book {
   background: radial-gradient(var(--color-400), var(--color-500));
   box-shadow: 0px 0px 25px -10px rgba(0, 0, 0, 0.75);
