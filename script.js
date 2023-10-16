@@ -12,6 +12,9 @@ const bookPages = document.getElementById("book_pages");
 const bookRead = document.getElementById("book_read");
 
 let readStatus = document.querySelectorAll(".read-status");
+let bookToEdit;
+let bookToEditEl;
+let editing = false;
 
 addBtn.addEventListener("click", () => {
   ResetModal();
@@ -19,15 +22,28 @@ addBtn.addEventListener("click", () => {
 });
 
 formBtn.addEventListener("click", () => {
-  addBookToLibrary(
-    bookTitle.value,
-    bookAuthor.value,
-    bookPages.value,
-    bookRead.checked
-  );
-  addBookCard(bookLibrary[bookLibrary.length - 1]);
-  UpdateListeners();
+  if (!editing) {
+    AddBookToLibrary(
+      bookTitle.value,
+      bookAuthor.value,
+      bookPages.value,
+      bookRead.checked
+    );
+    AddBookCard(bookLibrary[bookLibrary.length - 1]);
+    UpdateListeners();
+  } else {
+    editing = false;
+    UpdateBook();
+    UpdateBookCard();
+  }
 });
+
+function EditModal(book) {
+  bookTitle.value = book.title;
+  bookAuthor.value = book.author;
+  bookPages.value = book.pages;
+  bookRead.checked = book.read;
+}
 
 function ResetModal() {
   bookTitle.value = null;
@@ -39,7 +55,7 @@ function ResetModal() {
 function UpdateListeners() {
   readStatusBtns = document.querySelectorAll(".read-status");
 
-  changeBtns = document.querySelectorAll(".change-btn");
+  editBtns = document.querySelectorAll(".edit-btn");
   deleteBtns = document.querySelectorAll(".delete-btn");
 
   readStatusBtns.forEach((readStatusBtn) =>
@@ -61,6 +77,19 @@ function UpdateListeners() {
       parentEl.remove();
     });
   });
+
+  editBtns.forEach((editBtn) => {
+    editBtn.addEventListener("click", (e) => {
+      let parentEl = e.target.parentElement;
+      while (!parentEl.classList.contains("book-card")) {
+        parentEl = parentEl.parentElement;
+      }
+
+      bookToEdit = bookLibrary[parentEl.dataset.index];
+      bookToEditEl = parentEl;
+      EditBook(bookToEdit);
+    });
+  });
 }
 
 function Book(title, author, pages, read) {
@@ -70,12 +99,12 @@ function Book(title, author, pages, read) {
   this.read = read;
 }
 
-function addBookToLibrary(bookTitle, bookAuthor, bookPages, wasRead) {
+function AddBookToLibrary(bookTitle, bookAuthor, bookPages, wasRead) {
   const newBook = new Book(bookTitle, bookAuthor, bookPages, wasRead);
   bookLibrary.push(newBook);
 }
 
-function addBookCard(book) {
+function AddBookCard(book) {
   cardsContainer.innerHTML += `<div class="book-card" data-index=${
     bookLibrary.length - 1
   }>
@@ -88,8 +117,38 @@ function addBookCard(book) {
   }</p>
     </div>
     <div class="book-options">
-        <i class="fa-solid fa-gear fa-lg change-btn" style="color: #000000;"></i>
+        <i class="fa-solid fa-gear fa-lg edit-btn" style="color: #000000;"></i>
         <i class="fa-solid fa-trash fa-lg delete-btn" style="color: #d8463b;"></i>
     </div>
   </div>`;
+}
+
+function UpdateBook() {
+  bookToEdit.title = bookTitle.value;
+  bookToEdit.author = bookAuthor.value;
+  bookToEdit.pages = bookPages.value;
+  bookToEdit.read = bookRead.checked;
+}
+
+function UpdateBookCard() {
+  const bTitle = bookToEditEl.querySelector(".book-title");
+  const bAuthor = bookToEditEl.querySelector(".book-author");
+  const bPages = bookToEditEl.querySelector(".book-pages");
+  const bRead = bookToEditEl.querySelector(".read-status");
+
+  bTitle.innerHTML = bookToEdit.title;
+  bAuthor.innerHTML = "by " + bookToEdit.author;
+  bPages.innerHTML = bookToEdit.pages;
+  bRead.innerHTML = bookToEdit.read == true ? "Read" : "To Read";
+  if (bookToEdit.read == true) {
+    bRead.classList.add("read");
+  } else {
+    bRead.classList.remove("read");
+  }
+}
+
+function EditBook(book) {
+  editing = true;
+  EditModal(book);
+  bookSettings.showModal();
 }
