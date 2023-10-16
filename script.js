@@ -3,6 +3,7 @@ const bookLibrary = [];
 const cardsContainer = document.querySelector(".cards-container");
 
 const bookSettings = document.querySelector("dialog");
+const settingsTitle = document.querySelector(".settings-title");
 const addBtn = document.querySelector(".add-book");
 
 const formBtn = document.querySelector(".form-btn");
@@ -39,17 +40,25 @@ formBtn.addEventListener("click", () => {
 });
 
 function EditModal(book) {
+  settingsTitle.innerHTML = "Edit Book";
+
   bookTitle.value = book.title;
   bookAuthor.value = book.author;
   bookPages.value = book.pages;
   bookRead.checked = book.read;
+
+  formBtn.innerHTML = "Edit";
 }
 
 function ResetModal() {
+  settingsTitle.innerHTML = "New Book";
+
   bookTitle.value = null;
   bookAuthor.value = null;
   bookPages.value = null;
   bookRead.checked = false;
+
+  formBtn.innerHTML = "Add Book";
 }
 
 function UpdateListeners() {
