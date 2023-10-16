@@ -73,8 +73,14 @@ function UpdateListeners() {
         parentEl = parentEl.parentElement;
       }
 
-      let elementRemoved = bookLibrary.splice(parentEl.dataset.index);
+      let elementRemoved = bookLibrary.splice(parentEl.dataset.index, 1);
       parentEl.remove();
+      const bookCards = document.querySelectorAll(".book-card");
+      bookCards.forEach((book) => {
+        if (book.dataset.index > parentEl.dataset.index) {
+          book.dataset.index -= 1;
+        }
+      });
     });
   });
 
@@ -138,7 +144,7 @@ function UpdateBookCard() {
 
   bTitle.innerHTML = bookToEdit.title;
   bAuthor.innerHTML = "by " + bookToEdit.author;
-  bPages.innerHTML = bookToEdit.pages;
+  bPages.innerHTML = bookToEdit.pages + " pages";
   bRead.innerHTML = bookToEdit.read == true ? "Read" : "To Read";
   if (bookToEdit.read == true) {
     bRead.classList.add("read");
