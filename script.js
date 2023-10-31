@@ -107,11 +107,20 @@ function UpdateListeners() {
   });
 }
 
-function Book(title, author, pages, read) {
-  this.title = title;
-  this.author = author;
-  this.pages = pages;
-  this.read = read;
+class Book {
+  constructor(title, author, pages, read) {
+    this.title = title;
+    this.author = author;
+    this.pages = pages;
+    this.read = read;
+  }
+
+  UpdateInfo(newTitle, newAuthor, newPages, newRead) {
+    this.title = newTitle;
+    this.author = newAuthor;
+    this.pages = newPages;
+    this.read = newRead;
+  }
 }
 
 function AddBookToLibrary(bookTitle, bookAuthor, bookPages, wasRead) {
@@ -139,10 +148,12 @@ function AddBookCard(book) {
 }
 
 function UpdateBook() {
-  bookToEdit.title = bookTitle.value;
-  bookToEdit.author = bookAuthor.value;
-  bookToEdit.pages = bookPages.value;
-  bookToEdit.read = bookRead.checked;
+  bookToEdit.UpdateInfo(
+    bookTitle.value,
+    bookAuthor.value,
+    bookPages.value,
+    bookRead.checked
+  );
 }
 
 function UpdateBookCard() {
